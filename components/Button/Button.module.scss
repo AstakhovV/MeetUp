@@ -1,0 +1,63 @@
+@use "sass:color";
+
+.button {
+  $base-color: #5677ad;
+
+  height: 48px;
+  padding: 0 30px;
+  color: #fff;
+  font-size: 18px;
+  background: #5677ad;
+  border: 0;
+  border-radius: 30px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: color.adjust($base-color, $lightness: 2%);
+  }
+
+  &:active {
+    background-color: color.adjust($base-color, $lightness: -1%);
+    transform: translateY(1px);
+  }
+
+  &:disabled,
+  &:disabled:hover {
+    background-color: #cdcbc4;
+    cursor: default;
+  }
+}
+
+.buttonGreen {
+  $base-color: #20bd5f;
+
+  background-color: $base-color;
+
+  &:hover,
+  &:active {
+    background-color: color.adjust($base-color, $lightness: -2%);
+  }
+}
+
+.buttonGray {
+  $base-color: #f2f2f2;
+
+  color: #323232;
+  background-color: $base-color;
+
+  &:hover,
+  &:active {
+    background-color: color.adjust($base-color, $lightness: -2%);
+  }
+}
+
+.buttonBlue {
+  color: #5677ad;
+  background-color: transparent;
+  border: 2px solid #5677ad;
+
+  &:hover,
+  &:active {
+    background-color: color.adjust(#f2f2f2, $lightness: -2%);
+  }
+}

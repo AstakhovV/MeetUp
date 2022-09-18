@@ -1,0 +1,15 @@
+{
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "endOfLine": "lf",
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "useTabs": false,
+  "jsxBracketSameLine": false,
+  "jsxSingleQuote": false,
+  "importOrder": ["^react(.*)", "^[./]", "\\.scss$"],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true
+}

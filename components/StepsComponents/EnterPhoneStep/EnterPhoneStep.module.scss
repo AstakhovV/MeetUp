@@ -1,0 +1,22 @@
+.input {
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  input {
+    width: 265px;
+    padding-left: 55px;
+  }
+}
+
+.policyText {
+  margin-bottom: 0;
+  color: #817f7a;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+}

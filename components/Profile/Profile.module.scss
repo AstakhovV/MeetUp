@@ -1,0 +1,37 @@
+@mixin flex-mixin {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.profileBlock {
+  @include flex-mixin;
+  margin: 24px;
+}
+
+.avatarBlock {
+  @include flex-mixin;
+
+  h2, h3 {
+    margin: 0;
+  }
+}
+
+.followButton {
+  width: 100px;
+  height: 40px;
+  padding: 0;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.username {
+  opacity: 0.5;
+}
+
+.about {
+  margin: 0;
+  font-size: 22px;
+  line-height: 30px;
+}

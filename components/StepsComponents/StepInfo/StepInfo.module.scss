@@ -1,0 +1,24 @@
+.block {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+
+.title {
+  display: block;
+  margin: 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.description {
+  margin: 0;
+  font-size: 20px;
+}
+
+.img {
+  width: 48px;
+  height: 48px;
+}
