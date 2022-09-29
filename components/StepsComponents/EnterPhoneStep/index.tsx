@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { PatternFormat } from 'react-number-format';
 import { WhiteBlock } from '../../WhiteBlock';
 import { StepInfo } from '../StepInfo';
-
-import styles from './EnterPhoneStep.module.scss';
 import { useStepContext } from '../../../pages';
 import { NextComponentType } from 'next';
 import StepBlock from "../StepBlock/StepBlock";
 import NextStepButton from "../../NextStepButton";
+
+import styles from './EnterPhoneStep.module.scss';
 
 type InputValueState = {
   formattedValue: string;
@@ -19,7 +19,6 @@ export const EnterPhoneStep: NextComponentType = () => {
   const [values, setValues] = useState<InputValueState>(
     {} as InputValueState,
   );
-
   const nextDisabled =
     !values.formattedValue || values.formattedValue.includes('_');
 
@@ -35,13 +34,11 @@ export const EnterPhoneStep: NextComponentType = () => {
           <img src="/static/russian-flag.png" alt="flag" width={24} />
           <PatternFormat
             className="field"
-            format="+# (###) ###-##-##"
             mask="_"
+            format="+# (###) ###-##-##"
             placeholder="+7 (999) 333-22-11"
-            value={values.value}
-            onValueChange={({ formattedValue, value }: InputValueState) =>
-              setValues({ formattedValue, value })
-            }
+            value={values.formattedValue}
+            onValueChange={(values) => setValues(values)}
           />
         </div>
         <NextStepButton onClickNext={onNextStep} title="Next" disabled={nextDisabled} />

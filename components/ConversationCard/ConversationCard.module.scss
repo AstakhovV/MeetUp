@@ -1,0 +1,85 @@
+@import "styles/mixins";
+
+.card {
+  @include container;
+
+  display: flex;
+  flex-flow: column;
+  gap: 12px;
+  width: 380px;
+  min-height: 170px;
+  padding: 30px 35px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.title {
+  width: 320px;
+  margin: 0;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.content {
+  display: flex;
+  gap: 24px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.users {
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-weight: 600;
+  }
+}
+
+.avatarsBlock {
+  display: flex;
+  flex-flow: column;
+}
+
+.avatars {
+  display: inline-block;
+
+  &:not(:first-child) {
+    margin-top: -20px;
+  }
+}
+
+.details {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+}

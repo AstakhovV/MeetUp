@@ -1,8 +1,8 @@
 @mixin flex-mixin {
   display: flex;
   flex-flow: column;
-  align-items: center;
   gap: 12px;
+  align-items: center;
 }
 
 .profileBlock {
@@ -13,7 +13,8 @@
 .avatarBlock {
   @include flex-mixin;
 
-  h2, h3 {
+  h2,
+  h3 {
     margin: 0;
   }
 }

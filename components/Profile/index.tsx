@@ -3,6 +3,7 @@ import { Avatar } from '../Avatar';
 import { Button } from '../Button';
 
 import styles from './Profile.module.scss';
+import { BackButton } from "../BackButton/BackButton";
 
 interface ProfileProps {
   fullName: string;
@@ -21,6 +22,7 @@ export const Profile = (props: ProfileProps) => {
 
   return(
     <div className={styles.profileBlock}>
+      <BackButton href="/rooms" title="Back" />
       <div className={styles.avatarBlock}>
         <Avatar src={avatarUrl} width="100px" height="100px" />
         <h2>{fullName}</h2>

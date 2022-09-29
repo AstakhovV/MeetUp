@@ -1,14 +1,13 @@
+@import "styles/mixins";
+
 .block {
-  box-sizing: border-box;
-  width: 100%;
+  @include container;
+  display: flex;
+  flex-flow: column;
+  gap: 12px;
+  align-items: center;
+
   max-width: 650px;
   min-height: 200px;
   padding: 65px;
-  background: #cbd5e1;
-  border-radius: 20px;
-  box-shadow: 0 9px 87px -26px rgb(255 252 255 / 100%);
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  gap: 12px;
 }

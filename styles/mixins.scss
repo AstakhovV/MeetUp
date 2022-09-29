@@ -1,0 +1,7 @@
+@mixin container {
+  box-sizing: border-box;
+  width: 100%;
+  background: #cbd5e1;
+  border-radius: 20px;
+  box-shadow: 0 9px 50px -20px rgb(255 252 255 / 50%);
+}

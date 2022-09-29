@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { WelcomeStep } from '../components/StepsComponents/WelcomeStep';
 import { EnterNameStep } from '../components/StepsComponents/EnterNameStep';
-import { TwitterStep } from '../components/StepsComponents/TwitterStep';
+import { GoogleStep } from '../components/StepsComponents/GoogleStep';
 import { ChooseAvatarStep } from '../components/StepsComponents/ChooseAvatarStep';
 import { EnterPhoneStep } from '../components/StepsComponents/EnterPhoneStep';
 import { EnterCodeStep } from '../components/StepsComponents/EnterCodeStep';
@@ -10,8 +10,8 @@ import { createContextHelper, useContextHelper } from "../utils/createContextHel
 
 const stepsComponents: NextComponentType[] = [
   WelcomeStep,
+  GoogleStep,
   EnterNameStep,
-  TwitterStep,
   ChooseAvatarStep,
   EnterPhoneStep,
   EnterCodeStep,

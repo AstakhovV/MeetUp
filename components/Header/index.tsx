@@ -9,7 +9,7 @@ const defaultPhoto =
 
 export const Header = () => (
     <header className={styles.header}>
-        <Link href="/rooms">
+        <Link href="/rooms/index">
           <div
             className={styles.headerLogo}
           >

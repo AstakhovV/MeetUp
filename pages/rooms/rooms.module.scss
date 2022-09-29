@@ -1,0 +1,29 @@
+@mixin room {
+  display: flex;
+  flex-flow: column;
+  gap: 32px;
+  padding: 12px 20px;
+}
+
+.roomsBlock {
+  @include room;
+}
+
+.roomsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.roomBlock {
+  @include room;
+
+  color: #fff;
+}
+
+.roomsList {
+  display: grid;
+  grid-template-columns: repeat(3, 380px);
+  gap: 16px;
+}

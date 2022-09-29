@@ -1,29 +1,42 @@
 import { WhiteBlock } from '../../WhiteBlock';
 import { StepInfo } from '../StepInfo';
-import React from 'react';
+import React, { useState } from 'react';
 import { useStepContext } from '../../../pages';
 import { NextComponentType } from 'next';
 
-import styles from './TwitterStep.module.scss';
+import styles from './GoogleStep.module.scss';
 import StepBlock from '../StepBlock/StepBlock';
 import NextStepButton from "../../NextStepButton";
 
-export const TwitterStep: NextComponentType = () => {
+export const GoogleStep: NextComponentType = () => {
   const { onNextStep } = useStepContext();
-
-  const twitterIcon = (
-      <img
-        src="/static/twitter.svg"
-        alt="Twitter logo"
-        className={styles.twitterLogo}
-      />
+  const [data, setData] = useState('');
+  const onClickAuth = () => {
+    const win = window.open(
+      'http://localhost:3001/auth/google',
+      'Auth',
+      'width=500,height=500,status=yes,toolbar=no,menubar=no,location=no',
     );
+    const timer = setInterval(() => {
+      if (win.closed) {
+        clearInterval(timer);
+        data && onNextStep();
+      }
+    }, 100);
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('message', (data) => {
+      // @ts-ignore
+      setData(data);
+    });
+  }, []);
 
   return (
     <StepBlock>
       <StepInfo
         icon="/static/connect.png"
-        title="Do you want import info from Twitter?"
+        title="Do you want import info from Google?"
       />
       <WhiteBlock className={styles.whiteBlock}>
         <div className={styles.avatar}>
@@ -43,9 +56,8 @@ export const TwitterStep: NextComponentType = () => {
           </svg>
         </div>
         <p>Your Name</p>
-        <NextStepButton leftIcon={twitterIcon}
-                        onClickNext={onNextStep}
-                        title="Import from Twitter"
+        <NextStepButton onClickNext={onClickAuth}
+                        title="Import from Google"
         />
         <p>Enter my info manually</p>
       </WhiteBlock>

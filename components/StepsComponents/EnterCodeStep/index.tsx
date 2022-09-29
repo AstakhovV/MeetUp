@@ -33,7 +33,7 @@ export const EnterCodeStep: NextComponentType = () => {
   const onSubmit = async () => {
     try {
       setIsLoading(true);
-      await Axios.get('/todos');
+      //await Axios.get('/todos');
       await router.push('/rooms');
     } catch (error) {
       console.log('Ошибка при активации!');
