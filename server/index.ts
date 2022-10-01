@@ -2,9 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import dotenv from "dotenv";
 
-dotenv.config({
-  path: 'server/.env',
-});
+dotenv.config();
 
 import { passport } from "./core/google";
 import {sequelize} from "./core/db";

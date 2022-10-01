@@ -27,6 +27,7 @@ class AppDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
             rel="stylesheet"
           />
+          <link rel="shortcut icon" href="/static/meetUp.svg" />
         </Head>
         <body>
           <Main />

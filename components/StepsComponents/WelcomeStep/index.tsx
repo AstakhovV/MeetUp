@@ -14,8 +14,8 @@ export const WelcomeStep: NextComponentType = () => {
       <WhiteBlock>
         <div className={styles.title}>
           <img
-            className={styles.handWaveImg}
-            src="/static/hand-wave.png"
+            className={styles.logoImg}
+            src="/static/meetUp.svg"
             alt="Celebration"
           />
           <span>Welcome to MeetUp!</span>

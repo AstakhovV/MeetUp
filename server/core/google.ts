@@ -39,9 +39,8 @@ passport.use('google', new GoogleStrategy({
   },
 ));
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// @ts-ignore
+passport.serializeUser((user, done) => done(null, user.id));
 
 passport.deserializeUser(async (id, done) => {
   try {

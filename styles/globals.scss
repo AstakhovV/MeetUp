@@ -1,5 +1,3 @@
-@import "animations";
-
 html,
 body {
   margin: 0;
@@ -61,4 +59,10 @@ a {
   border-top-color: #b1aa97;
   border-radius: 50%;
   animation: 0.5s spin infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

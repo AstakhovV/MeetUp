@@ -1,15 +1,10 @@
-@import "styles/animations";
-
-.handWaveImg {
+.logoImg {
   display: inline-block;
   width: 2.5rem;
   height: 2.5rem;
   margin-right: 5px;
   margin-bottom: 3px;
   transform-origin: 70% 70%;
-  animation-name: wave-animation;
-  animation-duration: 3s;
-  animation-iteration-count: 1;
 }
 
 .title {
