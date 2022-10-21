@@ -1,23 +1,53 @@
 import express from 'express';
 import session from 'express-session';
-import dotenv from "dotenv";
-
-dotenv.config();
-
+import "./config";
+import multer from "multer";
+import cors from "cors";
+import sharp from "sharp";
+import fs from 'fs';
+import { nanoid } from "nanoid";
+import { sequelize } from "./core/db";
 import { passport } from "./core/google";
-import {sequelize} from "./core/db";
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) =>
+    cb(null, 'public/avatars'),
+  filename: (req, file, cb) =>
+    cb(null, `${file.fieldname}-${nanoid(10)}.${file.mimetype.split('/').pop()}`),
+});
+
+const upload = multer({ storage });
 
 const app = express();
-
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
 }));
+app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.post('/upload', upload.single('photo'), function (req, res) {
+  const filePath = req.file.path;
+  sharp(filePath)
+    .resize(150, 150)
+    .toFormat('jpeg')
+    .toFile(filePath.replace('.png', '.jpeg'), (err) => {
+      if (err) {
+        throw err;
+      }
+
+      fs.unlinkSync(filePath);
+
+      res.json({
+        url: `/avatars/${req.file.filename.replace('.png', '.jpeg')}`,
+      });
+    });
+});
+
 app.get('/auth/google',
-  passport.authenticate('google', { scope: ["profile", "email"] }));
+  passport.authenticate('google', { scope: ["email", "profile"] }));
 
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
@@ -30,6 +60,6 @@ app.get('/auth/google/callback',
   });
 
 app.listen(3001, async () => {
-  await sequelize.authenticate()
-  await sequelize.sync()
+  await sequelize.authenticate();
+  await sequelize.sync();
 });

@@ -1,6 +1,6 @@
 import { WhiteBlock } from '../../WhiteBlock';
 import { StepInfo } from '../StepInfo';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useStepContext } from '../../../pages';
 import { NextComponentType } from 'next';
 
@@ -9,28 +9,28 @@ import StepBlock from '../StepBlock/StepBlock';
 import NextStepButton from "../../NextStepButton";
 
 export const GoogleStep: NextComponentType = () => {
-  const { onNextStep } = useStepContext();
-  const [data, setData] = useState('');
-  const onClickAuth = () => {
-    const win = window.open(
+  const { onNextStep, setUser, user: currentUser } = useStepContext();
+  const onClickAuth = () =>
+    window.open(
       'http://localhost:3001/auth/google',
       'Auth',
       'width=500,height=500,status=yes,toolbar=no,menubar=no,location=no',
     );
-    const timer = setInterval(() => {
-      if (win.closed) {
-        clearInterval(timer);
-        data && onNextStep();
-      }
-    }, 100);
-  };
 
   React.useEffect(() => {
-    window.addEventListener('message', (data) => {
-      // @ts-ignore
-      setData(data);
+    window.addEventListener('message', ({ data }) => {
+      const user: string = data;
+
+      if (typeof user === 'string' && user.includes('avatarUrl')) {
+        const userObj = JSON.parse(user);
+        setUser(userObj);
+      }
     });
-  }, []);
+  }, [currentUser, onNextStep, setUser]);
+
+  useEffect(() => {
+    currentUser && onNextStep();
+  }, [currentUser, onNextStep]);
 
   return (
     <StepBlock>
@@ -59,7 +59,7 @@ export const GoogleStep: NextComponentType = () => {
         <NextStepButton onClickNext={onClickAuth}
                         title="Import from Google"
         />
-        <p>Enter my info manually</p>
+        <NextStepButton onClickNext={onNextStep} title="Enter my info manually"/>
       </WhiteBlock>
     </StepBlock>
   );
