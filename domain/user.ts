@@ -4,5 +4,6 @@ export interface UserData {
   avatarUrl: string;
   isActive: boolean;
   userName: string;
-  phone: string;
-};
+  email: string,
+  status: "Pending" | 'Active',
+}

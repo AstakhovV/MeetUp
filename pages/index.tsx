@@ -3,7 +3,7 @@ import { WelcomeStep } from '../components/StepsComponents/WelcomeStep';
 import { EnterNameStep } from '../components/StepsComponents/EnterNameStep';
 import { GoogleStep } from '../components/StepsComponents/GoogleStep';
 import { ChooseAvatarStep } from '../components/StepsComponents/ChooseAvatarStep';
-import { EnterPhoneStep } from '../components/StepsComponents/EnterPhoneStep';
+import { EnterEmailStep } from '../components/StepsComponents/EnterEmailStep';
 import { EnterCodeStep } from '../components/StepsComponents/EnterCodeStep';
 import { NextComponentType } from 'next';
 import { createContextHelper, useContextHelper } from "../utils/createContextHelper";
@@ -14,7 +14,7 @@ const stepsComponents: NextComponentType[] = [
   GoogleStep,
   EnterNameStep,
   ChooseAvatarStep,
-  EnterPhoneStep,
+  EnterEmailStep,
   EnterCodeStep,
 ];
 

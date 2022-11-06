@@ -8,6 +8,8 @@ import fs from 'fs';
 import { nanoid } from "nanoid";
 import { sequelize } from "./core/db";
 import { passport } from "./core/google";
+import { User } from "../models/user";
+import { sendConfirmationEmail } from "./nodemailer.config";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) =>
@@ -25,6 +27,7 @@ app.use(session({
   saveUninitialized: true,
 }));
 app.use(cors());
+app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -44,6 +47,25 @@ app.post('/upload', upload.single('photo'), function (req, res) {
         url: `/avatars/${req.file.filename.replace('.png', '.jpeg')}`,
       });
     });
+});
+
+app.post('/auth/code', async (req) => {
+  const { confirmationCode, userName } = await User.findOne({ where: { email: req.body.email } });
+  await sendConfirmationEmail(userName, req.body.email, confirmationCode);
+});
+
+app.post('/auth/verify-code', async (req, res) => {
+  const user = await User.findOne({ where: { email: req.body.email } });
+
+  if (user) {
+    if (user.confirmationCode === req.body.code){
+      const updatedUser = await user.update({ status: "Active" });
+
+      return res.json({ user: updatedUser });
+    } {
+      return res.json({ user: null });
+    }
+  }
 });
 
 app.get('/auth/google',
