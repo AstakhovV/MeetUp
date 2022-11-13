@@ -14,10 +14,10 @@ export const uploadFile = async (file: File): Promise<{ url: string }> => {
   return data;
 };
 
-export const sendConfirmationCode = (email) => {
-  Axios({ method: "POST", url: '/auth/code', data: { email } });
+export const sendConfirmationCode = (id, email) => {
+  Axios({ method: "POST", url: '/auth/code', data: { id, email } });
 };
 
-export const verifyConfirmationCode = async ({ email, code }) => Axios({
-    method: "POST", url: '/auth/verify-code', data: { email, code },
+export const verifyConfirmationCode = async ({ id, code }) => Axios({
+    method: "POST", url: '/auth/verify-code', data: { id, code },
   });

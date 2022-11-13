@@ -10,6 +10,8 @@ import { sequelize } from "./core/db";
 import { passport } from "./core/google";
 import { User } from "../models/user";
 import { sendConfirmationEmail } from "./nodemailer.config";
+import { Code } from "../models/code";
+import { generateCode } from "../utils/generateCode";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) =>
@@ -50,21 +52,24 @@ app.post('/upload', upload.single('photo'), function (req, res) {
 });
 
 app.post('/auth/code', async (req) => {
-  const { confirmationCode, userName } = await User.findOne({ where: { email: req.body.email } });
-  await sendConfirmationEmail(userName, req.body.email, confirmationCode);
+  const { id, email } = req.body;
+  const code = generateCode();
+  await Code.create({ userId: id, confirmationCode: code });
+  await sendConfirmationEmail(email, code);
 });
 
 app.post('/auth/verify-code', async (req, res) => {
-  const user = await User.findOne({ where: { email: req.body.email } });
+  const { id: userId, code } = req.body;
+  const userCode = await Code.findOne({ where: { userId, confirmationCode: code } });
 
-  if (user) {
-    if (user.confirmationCode === req.body.code){
-      const updatedUser = await user.update({ status: "Active" });
+  if (!userCode) {
+    return res.status(400).send();
+  }
 
-      return res.json({ user: updatedUser });
-    } {
-      return res.json({ user: null });
-    }
+  if (userCode.confirmationCode === code) {
+    const updatedUser = await User.update({ status: "Active" }, { where: { id: userId } });
+
+    return res.json({ user: updatedUser });
   }
 });
 

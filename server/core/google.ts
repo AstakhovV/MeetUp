@@ -20,18 +20,14 @@ passport.use('google', new GoogleStrategy({
         avatarUrl: profile.photos[0].value,
         isActive: false,
         email,
-        confirmationCode: generateCode(),
         userName: profile.displayName,
         status: "Pending",
       };
 
-      const findUser = await User.findOne({ where: { email }, attributes: {
-            exclude: ['confirmationCode'],
-        } });
+      const findUser = await User.findOne({ where: { email } });
 
       if (!findUser) {
         const user = await User.create(obj);
-        delete user.confirmationCode;
         userData = user.toJSON();
       } else {
         userData = await findUser.toJSON();

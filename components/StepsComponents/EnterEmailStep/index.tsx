@@ -16,7 +16,7 @@ export const EnterEmailStep: NextComponentType = () => {
     setEmail(event.target.value);
 
   const handleClickNext = async () => {
-    sendConfirmationCode(user.email);
+    sendConfirmationCode(user.id, user.email);
     onNextStep();
   };
 

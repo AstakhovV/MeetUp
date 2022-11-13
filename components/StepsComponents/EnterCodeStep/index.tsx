@@ -21,7 +21,7 @@ export const EnterCodeStep: NextComponentType = () => {
     const index = Number(target.getAttribute('id'));
     const value = target.value;
 
-    if (Number(value) || !value) {
+    if (Number.isInteger(Number(value)) || !value) {
       setCodes((prev) => {
         const newArr = [...prev];
         newArr[index] = value;
@@ -38,7 +38,7 @@ export const EnterCodeStep: NextComponentType = () => {
   const onSubmit = async () => {
     try {
       setIsLoading(true);
-      const { data } = await verifyConfirmationCode({ email: user.email, code: codes.join('') });
+      const { data } = await verifyConfirmationCode({ id: user.id, code: codes.join('') });
 
       if(data.user) {
         await router.push('/rooms');
